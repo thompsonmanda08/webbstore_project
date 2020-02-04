@@ -1,0 +1,26 @@
+{%extends 'base.html' %}
+
+{% block content %}
+
+<h1>WEBBSTORE HOME PAGE!!!</h1>
+<br>
+<h1>WEBBSTORE PRODUCTS!!!</h1>
+    <div class="row">
+        {% for product in products %}
+            <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ product.img_url }}" class="card-img-top" alt="..." width="600px" height="300px">
+                <div class="card-body">
+                    <h6 class="card-title">{{ product.name }}</h6>
+                        <h3 class="card-price">${{ product.price }}</h3>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+<br>
+<br>
+<h1>WEBBSTORE TRENDING!!!</h1>
+
+{% endblock %}
