@@ -12,14 +12,14 @@ def products_list(request):
     products = Product.objects.all()
     context = {'products': products}
 
-    return render(request, 'products.html', context)
+    return render(request, 'products_template/products.html', context)
 
 
 def product_details(request, prod_id):
     product = Product.objects.get(id=prod_id)
     context = {'product': product}
 
-    return render(request, 'product_details.html', context)
+    return render(request, 'products_template/product_details.html', context)
 
 # CRUD  - C = Create
 # Creating a new product in the Database from the Frontend
@@ -33,7 +33,7 @@ def register_product(request):
         'form': form,
         'form_type': 'REGISTER'
     }
-    return render(request, 'register_product.html', context)
+    return render(request, 'products_template/register_product.html', context)
 
 
 # CRUD - U = Update
@@ -50,7 +50,7 @@ def update_product(request, prod_id):
         'form_type': 'UPDATE'
     }
 
-    return render(request, 'register_product.html', context)
+    return render(request, 'products_template/register_product.html', context)
 
 
 # CRUD - D = Delete
