@@ -7,13 +7,14 @@
 
             <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src="{{ product.img_url }}" class="card-img-top" alt="...">
+                <img src="{{ product.image.url }} " class="card-img-top" alt="loading image" >
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                         <h3 class="card-price">${{ product.price }}</h3>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
                     <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <a href="{% url 'products:update' product.id %}" class="btn btn-success">Edit Product</a>
                 </div>
             </div>
         </div>

@@ -5,9 +5,11 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = [
+            'category',
             'name',
             'price',
             'stock',
            'description',
-            'img_url',
+            'image',
+
         ]

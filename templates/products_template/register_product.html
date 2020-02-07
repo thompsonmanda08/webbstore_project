@@ -1,9 +1,8 @@
 {%extends 'base.html' %}
 <br>
 <br>
-<br>
 
-  {% block content%}
+{% block content%}
 
   <h1>{{ form_type }} YOUR PRODUCT HERE</h1>
 <div>
@@ -12,8 +11,15 @@
     {{ form.as_p }}
     <button class="btn btn-primary" type="submit">{{ form_type }}</button>
 
+
+    {% if form_type == 'UPDATE' %}
+    {# To Delete Already existing Products on the Update page#}
+
+    <a href="#" class="btn btn-danger">Delete Product</a>
+
+    {% endif %}
 </form>
 
 </div>
 
-        {%endblock%}
+{%endblock%}

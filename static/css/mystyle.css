@@ -1,0 +1,10 @@
+h1, h2 {
+    font-size: 18px;
+    color: darkviolet;
+}
+
+
+#searchbox {
+    align-content: center;
+    text-align: center;
+}
