@@ -1,0 +1,22 @@
+{%extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="jumbotron">
+        {% if registered %}
+            <h1> Thank for Signing Up, Enjoy Shopping at the WEBB-STORE</h1>
+        {% else %}
+        <h1 class="text-center">SIGN UP HERE AND ENJOY MORE DISCOUNTS</h1>
+        <form enctype="multipart/form-data" action="" method="POST">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ user_account_form.as_p }}
+
+            <input type="submit" value="Register">
+        </form>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

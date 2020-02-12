@@ -1,0 +1,33 @@
+{%extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="container text-center" >
+    <div class="jumbotron">
+      <div class="container">
+        <form action="{% url 'user_accounts:user_login' %}" class="form-signin" method="POST">
+        {% csrf_token %}
+      <img class="mb-4" src="{% static "images/logo.png" %}" alt="" width="180">
+      <h1>LOGIN</h1>
+      <label for="inputEmail" class="sr-only">Username</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="username" required autofocus>
+        <br>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+        <br>
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+      <br>
+      <br>
+        <a href=""><p>forgot your password?</p></a>
+        <p>Don't have an account yet? </p><a href="{% url 'user_accounts:register' %}">Sign Up Here</a>
+      <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+        </form>
+      </div>
+
+
+
+    </div>
+
+  </div>
+{% endblock %}

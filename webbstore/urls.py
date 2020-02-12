@@ -18,13 +18,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from user_accounts.views import user_logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name= 'homepage'),
+    path('logout/', user_logout, name='logout'),
 
     path('products/', include('products.urls')),
     path('mybasket/', include('mybasket.urls')),
+    path('user/', include('user_accounts.urls')),
 
 
 ]
