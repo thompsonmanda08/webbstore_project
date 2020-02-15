@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import Product
 from .forms import RegisterForm
+
 
 
 # Create your views here.
@@ -15,20 +16,21 @@ def products_list(request):
     return render(request, 'products_template/products.html', context)
 
 
+
 def product_details(request, prod_id):
     product = Product.objects.get(id=prod_id)
     context = {'product': product}
 
     return render(request, 'products_template/product_details.html', context)
 
+
 # CRUD  - C = Create
 # Creating a new product in the Database from the Frontend
 def register_product(request):
     form = RegisterForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        instance = form.save()
         return HttpResponseRedirect('/products')
-
     context = {
         'form': form,
         'form_type': 'REGISTER'
@@ -56,7 +58,8 @@ def update_product(request, prod_id):
 # CRUD - D = Delete
 # Deleting a product from the Frontend
 
+
 def delete_product(request, prod_id):
-    product = Product.objects.get(id=prod_id)
+    product = Product.objects.get(id =prod_id)
     product.delete()
-    return HttpResponseRedirect('/products')
+    return redirect('/products')

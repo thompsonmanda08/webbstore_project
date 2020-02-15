@@ -4,19 +4,19 @@
 
 {% block content%}
 
-  <h1>{{ form_type }} YOUR PRODUCT HERE</h1>
+  <h1>{{ form_type }} YOUR PRODUCT HERE</h1><br>
+
+{# MESSAGE NOTIFICATION OF ACTION #}
+
 <div>
-  <form method="POST" action="..">
-  {% csrf_token %}
+  <form method="POST" action=".">
+    {% csrf_token %}
     {{ form.as_p }}
+
     <button class="btn btn-primary" type="submit">{{ form_type }}</button>
-
-
-    {% if form_type == 'UPDATE' %}
-    {# To Delete Already existing Products on the Update page#}
-
-    <a href="#" class="btn btn-danger">Delete Product</a>
-
+        {% if form_type == 'UPDATE' %}
+        {# To Delete Already existing Products on the Update page#}
+        <a href="{# url 'products:remove' product.id #}" class="btn btn-danger">Delete</a>
     {% endif %}
 </form>
 

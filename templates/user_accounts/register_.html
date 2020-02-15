@@ -3,31 +3,37 @@
 
 {% block content %}
 
-    <div class="jumbotron">
+    <div class="container">
         {% if registered %}
-            <h1> Thank for Signing Up, Enjoy Shopping at the WEBB-STORE</h1>
+            <div class="text-center">
+                <h1>Thank for Signing Up! </h1>
+                <h1>Enjoy Shopping at the WEBB-STORE</h1>
+            </div>
         {% else %}
-        <h1 class="text-center">SIGN UP HERE AND ENJOY MORE DISCOUNTS</h1>
-        <form enctype="multipart/form-data" action="" method="POST">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ user_account_form.as_p }}
 
-            <input type="submit" value="Register">
-        </form>
+        <br><h1 class="text-center">SIGN UP HERE AND ENJOY MORE DISCOUNTS</h1><br><br>
 
         <form action="" method="POST">
             {% csrf_token %}
-
             <div class="form-row">
-                    <div class="col">
-                    <!--  USED TO CREATE COLUMNS TO CENTER THE FORM-->
-                    </div>
-                    <div class="col col-md-6">
+                <div class="col"><!--  USED TO CREATE COLUMNS TO CENTER THE FORM--> </div>
+                    <div class="col col-md-6 text-center">
                         <input type="text" class="form-control" placeholder="First name" name="first_name"><br>
                         <input type="text" class="form-control" placeholder="Last name" name="last_name"><br>
                         <input type="text" class="form-control" placeholder="Username" name="username"><br>
+                        <small id="emailHelp" class="form-text text-muted">
+                            {% if error %}
+                            {{ error }}
+                            {% endif %}
+                        </small>
+
                         <input type="text" class="form-control" placeholder="Email Address" name="email"><br>
+                        <small id="emailHelp" class="form-text text-muted">
+                        {% if password_error %}
+                        {{ password_error }}
+                        {% endif %}
+                         </small>
+
                         <input type="password" class="form-control" placeholder="Password" name="password1"><br>
                         <input type="password" class="form-control" placeholder="Confirm Password" name="password2"><br>
                         <div class="form-check">
@@ -37,22 +43,18 @@
                         </label><br>
                         </div>
                         <br>
-                        <p class="col-md-15 ">Already have an account? <a href="{% url 'user_accounts:user_login' %}">Login!</a></p>
 
                         <button type="submit" class="btn btn-primary btn-block col-md-15 ">Register</button>
                         <br>
+                        <p class="col-md-15 ">Already have an account? <a href="{% url 'user_accounts:user_login' %}">Login!</a></p>
+                        <br>
+                        <p class="mt-5 mb-3 text-muted">INTER-WEBB's WEBB-STORE &copy; 2020</p>
+                    </div>
 
-                    </div>
-                    <div class="col">
-                    <!--  USED TO CREATE COLUMNS TO CENTER THE FORM-->
-                    </div>
-              </div>
+                    <div class="col"> <!--  USED TO CREATE COLUMNS TO CENTER THE FORM--> </div>
+            </div>
 
         </form>
-
-
-
-
         {% endif %}
 
     </div>

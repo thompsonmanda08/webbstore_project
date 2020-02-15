@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import UserForm, UserAccountForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout, models
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib import auth
 
 # Create your views here.
 
@@ -13,8 +15,8 @@ def index(request):
     context = {}
     return render(request, 'user_accounts/account_profile.html', context)
 
-
-def register(request):
+# User Registrations using Django modelForms (NOT FUNCTIONAL!!!)
+def register_old(request):
     loggedin = False
     registered = False
 
@@ -51,10 +53,42 @@ def register(request):
         'user_form': user_form,
         'user_account_form': user_account_form,
         'registered': registered,
-        'loggedin': loggedin,
     }
 
     return render(request, 'user_accounts/register.html', context)
+
+# User Registrations using Bootstrap forms designed in HTML file (FUNCTIONAL)
+def register(request):
+
+    if request.method == 'POST': # User has submitted info and wants an account
+        username = request.POST['username']
+        email = request.POST['email']
+
+        if request.POST['password1'] == request.POST['password2']: # Password Validation
+
+            try: # This is likely to fail if both email and username are not in database!
+                user = models.User.objects.get(username=username)
+                context = {
+                    'error': 'Username/Email already exists! Try a new one!'
+                        }
+                return render(request, 'user_accounts/register_.html', context)
+
+            except (User.DoesNotExist):
+                user = models.User.objects.create_user(username=request.POST['username'],
+                                                       password=request.POST['password2'],
+                                                       email=request.POST['email'],
+                                                       first_name=request.POST['first_name'],
+                                                       last_name=request.POST['last_name'],)
+
+                # After creating the user we want to log them into their account!
+
+                auth.login(request, user)
+                return HttpResponseRedirect(reverse('homepage'))
+        else:
+            return render(request, 'user_accounts/register_.html', {'password_error': "Passwords Don't match! Try again!"})
+    else:
+        return render(request, 'user_accounts/register_.html')
+
 
 
 def user_login(request):

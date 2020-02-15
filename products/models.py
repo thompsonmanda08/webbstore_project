@@ -19,7 +19,6 @@ class Product(models.Model):
     stock = models.IntegerField()
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/', blank=True)
-    image_url = models.CharField(max_length=1000, default=None, blank=True)
 
     def __str__(self):
         return self.name[:100]
@@ -27,4 +26,4 @@ class Product(models.Model):
 class Offer(models.Model):
     code = models.CharField(max_length=7)
     description = models.TextField(blank=True)
-    discount = models.FloatField()
+    discount = models.FloatField(blank=True)
